@@ -1,5 +1,15 @@
-# regression model: Baseline(linear regression) or Random Forest Regressor
 def regression_model(X, y, test_size=0.2, model_type="baseline", depth=0):
+    """
+        regression model: Baseline(linear regression) or Random Forest Regressor
+        Input:
+            X: feature matrix
+            y: label values
+            test_size: testing ratio
+            model_type: "baseline" or "random_forest"
+        Output:
+            mdl: regression model
+            error: mean squared error
+    """
     from sklearn.model_selection import train_test_split
     from sklearn.linear_model import LinearRegression
     from sklearn.metrics import mean_squared_error
