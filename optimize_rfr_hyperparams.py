@@ -25,7 +25,7 @@ random_grid = {'n_estimators': n_estimators,
                'bootstrap': bootstrap}
 
 def optimize_rf(train_features, train_labels, random_grid):
-    rf = RandomForestRegressor(random_state = 17)
+    rf = RandomForestRegressor(random_state = 0)
     rf_random = RandomizedSearchCV(estimator = rf,
                                param_distributions = random_grid,
                                n_iter = 100, 
