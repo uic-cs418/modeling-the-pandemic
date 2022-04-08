@@ -7,7 +7,7 @@ Created on Thu Apr  7 11:14:51 2022
 
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
-import pyplot as plt
+import matplotlib.pyplot as plt
 import numpy as np
 
 def scale_df(X):
