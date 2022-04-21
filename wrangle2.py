@@ -132,8 +132,11 @@ def get_data():
     zipcodes = df.Zipcode.tolist()
     socio_df = getSocioDem(zipcodes)
     merge_df = pd.merge(socio_df, df, how='inner', on='Zipcode')
+    # drop data rows that have 0 population
     zero_rows = merge_df[merge_df['Population'] == 0].index.tolist()
     merge_df = merge_df.drop(zero_rows)
+    # drop data rows that have 0 mean household income
+    merge_df = merge_df.drop(merge_df[merge_df['Median household income (USD)'] == 0].index.tolist())
     merge_df['Death Counts(Per 1000)'] = (merge_df['Death Counts'] / merge_df['Population']) * 1000
     merge_df['Case Counts(Per 1000)'] = (merge_df['Case Counts'] / merge_df['Population']) * 1000
     return merge_df
