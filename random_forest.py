@@ -34,7 +34,7 @@ def split(features, labels):
    return train_features, test_features, train_labels, test_labels
 
 def rfr_default(features, labels, random_state = 0):
-    rf = RandomForestRegressor(n_estimators = 1000, random_state = random_state)
+    rf = RandomForestRegressor(n_estimators = 100, random_state = random_state)
     rf.fit(features, labels)
     return rf
 
