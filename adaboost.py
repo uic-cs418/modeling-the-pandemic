@@ -4,7 +4,7 @@ from sklearn.ensemble import AdaBoostRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import KFold
 from sklearn.tree import DecisionTreeRegressor
-
+import matplotlib.pyplot as plt
 def adaboost_hyperparameter_tuning(X, y):
     """
         Finding the best depth and # of estimators 
