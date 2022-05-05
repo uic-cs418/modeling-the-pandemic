@@ -38,7 +38,7 @@ def select_relevant(X):
     return(X.loc[:,"Median age":"North America(%)"])
 
 def plot_obs_exp(model, x, y):
-    fig,ax = plt.subplots(figsize=(10,10))
+    fig,ax = plt.subplots(figsize=(6,6))
 
     ax.scatter(x = (model.predict(x)), y = (y), s = 70)
 
