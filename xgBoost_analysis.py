@@ -22,17 +22,16 @@ def xgBoost_analysis():
     y = df['Death Counts(Per 1000)']
     X = df.drop('Death Counts(Per 1000)', 1)
     X = X.drop('Death Counts', 1)
-    X_train, X_test, y_train, y_test = train_test_split(df, y, test_size=0.3, random_state=42)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
     
     tuned_model = XGBRegressor(colsample_bytree=0.9, gamma=0.0, max_depth=5, n_estimators=80,
              objective='reg:squarederror', subsample=0.9)
     tuned_model.fit(X_train, y_train)
-    y_pred_updated = tuned_model.predict(X_test)
-    absolute_error = abs(y_pred_updated - y_test)
-    abs_error = round(np.mean(absolute_error), 2)
-    MSE = mean_squared_error(y_test, y_pred_updated)
-    R2_score = r2_score(y_test, y_pred_updated)
-    fig,ax = plt.subplots()
+
+    train_error = abs((tuned_model.predict(X_train)) - (y_train))
+    test_error = abs((tuned_model.predict(X_test)) - (y_test))
+
+    fig,ax = plt.subplots(figsize=(6,6))
     ax.scatter(x = (tuned_model.predict(X_test)), y = (y_test), s = 70)
 
     lims = [
@@ -40,6 +39,7 @@ def xgBoost_analysis():
             np.max([ax.get_xlim(), ax.get_ylim()]),  # max of both axes
             ]
 
+    plt.rcParams.update({'font.size': 15})
     ax.plot(lims, lims, 'k-', alpha=0.75, zorder=0)
     ax.set_aspect('equal')
     ax.set_xlim(lims)
@@ -48,9 +48,8 @@ def xgBoost_analysis():
     ax.set_ylabel("Actual")
     ax.set_title("Covid-19 Related Deaths per 1000\n(predicted by tuned XGBoost model)")
     print(" ")
-    print("The absolue error is for prediction is: ", abs_error, "Deaths Counts/1000")
-    print("The mean squared error for prediction is: ", MSE, "Deaths Counts/1000")
-    print("The r2 square for the model is: ", R2_score)
+    print("Mean absolute training error (deaths per thousand): ", np.mean(train_error))
+    print("Mean absolute test error (deaths per thousand): ", np.mean(test_error))
     
     
 
