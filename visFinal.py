@@ -76,27 +76,26 @@ def lineChart():
     fig.tight_layout()
 
 def scatterPlot(mergedSocCovid, city):
-    plt.rcParams.update({'font.size': 13})
+    plt.rcParams.update({'font.size': 15})
     fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(nrows=2, ncols=2, figsize=(25,10))
     fig.suptitle('Correlation of Sociodemographic factors with Covid Death Cases: '+ city,fontsize=15)
 
     sns.regplot(ax=ax1, data=mergedSocCovid, x="Median household income (USD)", y="Death Counts(Per 1000)")
     sns.regplot(ax=ax2, data=mergedSocCovid, x="Per capita income (USD)", y="Death Counts(Per 1000)")
 
-    print()
     sns.regplot(ax=ax3, data=mergedSocCovid, x="Below poverty line(%)", y="Death Counts(Per 1000)")
     sns.regplot(ax=ax4, data=mergedSocCovid, x="Median housing value", y="Death Counts(Per 1000)")
 
 def scatterPlotComp(All, Ny, Chi):
-    plt.rcParams.update({'font.size': 13})
+    plt.rcParams.update({'font.size': 15})
     fig, (ax1, ax2, ax3) = plt.subplots(nrows=1, ncols=3, figsize=(35, 5))
 
     ax1.title.set_text('\nAll Data')
-    sns.regplot(ax=ax1, data=All, x="Median household income (USD)", y="Death Counts(Per 1000)")
+    sns.regplot(ax=ax1, data=All, color='red', x="Median household income (USD)", y="Death Counts(Per 1000)")
     ax2.title.set_text('\nNew York')
-    sns.regplot(ax=ax2, data=Ny, x="Median household income (USD)", y="Death Counts(Per 1000)")
+    sns.regplot(ax=ax2, data=Ny, color='blue', x="Median household income (USD)", y="Death Counts(Per 1000)")
     ax3.title.set_text('\nChicago')
-    sns.regplot(ax=ax3, data=Chi, x="Median household income (USD)", y="Death Counts(Per 1000)")
+    sns.regplot(ax=ax3, data=Chi, color='green', x="Median household income (USD)", y="Death Counts(Per 1000)")
 
 
 def featureImportance(mergedSocCovid,cor):
