@@ -48,8 +48,8 @@ def xgBoost_analysis():
     ax.set_ylabel("Actual")
     ax.set_title("Covid-19 Related Deaths per 1000\n(predicted by tuned XGBoost model)")
     print(" ")
-    print("The absolue error is: ", abs_error)
-    print("The mean squared error is: ", MSE)
+    print("The absolue error is for prediction is: ", abs_error, "Deaths Counts/1000")
+    print("The mean squared error for prediction is: ", MSE, "Deaths Counts/1000")
     print("The r2 square for the model is: ", R2_score)
     
     
