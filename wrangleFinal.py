@@ -202,6 +202,28 @@ def prepare_data():
 
     return df
 
+def getNY():
+    if(os.path.exists('NewYork-Covid-SocioDemographics-Cases-Deaths.csv')):
+        nydf = pd.read_csv('NewYork-Covid-SocioDemographics-Cases-Deaths.csv')
+    else:
+        ny = pd.read_csv('Data/Covid Data/newyork-covid19-cases-and-deaths.csv')
+        ny = ny[['MODIFIED_ZCTA', 'COVID_CASE_COUNT', 'COVID_DEATH_COUNT']]
+        ny.columns = ['Zipcode', 'Case Counts', 'Death Counts']
+        nyZip = ny.Zipcode.tolist()
+        nySoc = getSocioDem(nyZip)
+        nydf = pd.merge(ny, nySoc, how='inner', on='Zipcode')
+        zero = nydf[nydf['Population'] == 0].index.tolist()
+        nydf = nydf.drop(zero)
+        nydf = nydf.drop(nydf[nydf['Median household income (USD)'] == 0].index.tolist())
+        nydf['Death Counts(Per 1000)'] = (nydf['Death Counts'] / nydf['Population']) * 1000
+        nydf['Case Counts(Per 1000)'] = (nydf['Case Counts'] / nydf['Population']) * 1000
+        nydf.to_csv('NewYork-Covid-SocioDemographics-Cases-Deaths.csv', index=False)
+
+    return nydf
+
+# def getSF():
+
+
 def getChi():
     if(os.path.exists('Chicago-Covid-SocioDemographics-Cases-Deaths.csv')):
         chicago = pd.read_csv('Chicago-Covid-SocioDemographics-Cases-Deaths.csv')
