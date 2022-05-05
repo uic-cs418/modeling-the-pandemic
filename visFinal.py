@@ -41,7 +41,7 @@ def covidDeath():
     return df
 
 def lineChart():
-    plt.rcParams.update({'font.size': 15})
+    plt.rcParams.update({'font.size': 25})
     zip = pd.read_csv("Data/Zip_Codes.csv")
     zipcodes = zip.ZIP.to_list()
     zipcodes.remove(60666) #OHare Airport!!
@@ -62,7 +62,7 @@ def lineChart():
     caseCountByDate = caseCountByDate.rename(columns={'Week End': 'Date', 'Cases - Weekly': 'Cases'})
     caseCountByDate = caseCountByDate.groupby('Date').sum().reset_index()
 
-    fig, ((ax1, ax2)) = plt.subplots(nrows=2, ncols=1, figsize=(30,10))
+    fig, ((ax1, ax2)) = plt.subplots(nrows=2, ncols=1, figsize=(30,18))
 
     sns.lineplot(ax=ax1, data=deathCountByDate, x="Date of Death", y="Death Counts", color='r')
     ax1.set_xlabel("Date")
@@ -77,8 +77,8 @@ def lineChart():
 
 def scatterPlot(mergedSocCovid, city):
     plt.rcParams.update({'font.size': 15})
-    fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(nrows=2, ncols=2, figsize=(25,10))
-    fig.suptitle('Correlation of Sociodemographic factors with Covid Death Cases: '+ city,fontsize=15)
+    fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(nrows=2, ncols=2, figsize=(25,8))
+    fig.suptitle('Correlation of Sociodemographic factors with Covid Death Cases: '+ city,fontsize=20)
 
     sns.regplot(ax=ax1, data=mergedSocCovid, x="Median household income (USD)", y="Death Counts(Per 1000)")
     sns.regplot(ax=ax2, data=mergedSocCovid, x="Per capita income (USD)", y="Death Counts(Per 1000)")
@@ -87,8 +87,8 @@ def scatterPlot(mergedSocCovid, city):
     sns.regplot(ax=ax4, data=mergedSocCovid, x="Median housing value", y="Death Counts(Per 1000)")
 
 def scatterPlotComp(All, Ny, Chi):
-    plt.rcParams.update({'font.size': 15})
-    fig, (ax1, ax2, ax3) = plt.subplots(nrows=1, ncols=3, figsize=(35, 5))
+    plt.rcParams.update({'font.size': 25})
+    fig, (ax1, ax2, ax3) = plt.subplots(nrows=1, ncols=3, figsize=(35, 10))
 
     ax1.title.set_text('\nAll Data')
     sns.regplot(ax=ax1, data=All, color='red', x="Median household income (USD)", y="Death Counts(Per 1000)")
@@ -119,18 +119,18 @@ def geographicPlot(mergedSocCovid):
     gdf['Zipcode'] = gdf['Zipcode'].astype(str).astype(int)
     df = pd.merge(mergedSocCovid, gdf, how='inner', on = 'Zipcode')
     gdf = gpd.GeoDataFrame(df)
-    plt.rcParams.update({'font.size': 14})
-    fig, ((ax1, ax2)) = plt.subplots(nrows=1, ncols=2, figsize=(40,40))
-    ax1.set_title('Covid Case Rates in Chicago Neighborhoods', fontsize=20)
+    plt.rcParams.update({'font.size': 25})
+    fig, ((ax1, ax2)) = plt.subplots(nrows=1, ncols=2, figsize=(40,50))
+    ax1.set_title('Covid Case Rates in Chicago Neighborhoods', fontsize=25)
     divider = make_axes_locatable(ax1)
     cax1 = divider.append_axes("right", size="5%", pad=0.1)
-    plt.rcParams.update({'font.size': 14})
-    gdf.apply(lambda x: ax1.annotate(text=x['Zipcode'], fontsize=13, color='black', xy=x.geometry.centroid.coords[0], ha='right'), axis=1)
+    plt.rcParams.update({'font.size': 25})
+    gdf.apply(lambda x: ax1.annotate(text=x['Zipcode'], fontsize=15, color='black', xy=x.geometry.centroid.coords[0], ha='right'), axis=1)
     gdf.plot(column = 'Case Counts(Per 1000)', ax=ax1, cmap='crest', legend=True, cax=cax1, legend_kwds={'label': 'Case Counts(Per 1000)'});
 
-    ax2.set_title('Covid Death Rates in Chicago Neighborhoods', fontsize=20)
+    ax2.set_title('Covid Death Rates in Chicago Neighborhoods', fontsize=25)
     divider = make_axes_locatable(ax2)
     cax2 = divider.append_axes("right", size="5%", pad=0.1)
-    plt.rcParams.update({'font.size': 14})
-    gdf.apply(lambda x: ax2.annotate(text=x['Zipcode'], fontsize=13, color='black', xy=x.geometry.centroid.coords[0], ha='right'), axis=1)
+    plt.rcParams.update({'font.size': 25})
+    gdf.apply(lambda x: ax2.annotate(text=x['Zipcode'], fontsize=15, color='black', xy=x.geometry.centroid.coords[0], ha='right'), axis=1)
     gdf.plot(column = 'Death Counts(Per 1000)', ax=ax2, cmap='crest', legend=True, cax=cax2, legend_kwds={'label': 'Death Counts(Per 1000)'});
