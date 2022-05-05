@@ -34,12 +34,13 @@ def split(features, labels):
    return train_features, test_features, train_labels, test_labels
 
 def rfr_default(features, labels, random_state = 0):
-    rf = RandomForestRegressor(n_estimators = 100, random_state = random_state, criterion = 'absolute')
+    rf = RandomForestRegressor(n_estimators = 100, random_state = random_state, criterion = 'absolute_error')
     rf.fit(features, labels)
     return rf
 
 def rfr_custom(features, labels, params, random_state = 0):
     rf = RandomForestRegressor(n_estimators = params['n_estimators'],
+                               criterion = "absolute_error",
                                bootstrap = params['bootstrap'],
                                max_depth = params['max_depth'],
                                max_features = params['max_features'],
