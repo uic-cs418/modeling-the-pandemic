@@ -27,6 +27,7 @@ def PCA_2(X, random_state = 17):
 def plot_pca(pca_data, pca_model, labels, title, cmap = "icefire"):
     pc1 = pca_data[:,0]
     pc2 = pca_data[:,1]
+    plt.rcParams.update({'font.size': 15})
     plt.figure(figsize=(10,7))
     plt.scatter(x = pc1, y = pc2, s = 70,
                 c = labels, cmap = cmap)
@@ -49,6 +50,7 @@ def plot_pca_cat_labeled(pca_data, pca_model, labels, title, data, cols):
     pc1 = pca_data[:,0]
     pc2 = pca_data[:,1]
     #print(pc1, pc2)
+    plt.rcParams.update({'font.size': 15})
     plt.figure(figsize=(10,7))
     plt.scatter(x = pc1, y = pc2, s = 70,
                 c = cols, alpha = .65)
@@ -88,6 +90,7 @@ def pltcolor(lst):
 def plot_pca_cat(pca_data, pca_model, labels, title, cols):
     pc1 = pca_data[:,0]
     pc2 = pca_data[:,1]
+    plt.rcParams.update({'font.size': 15})
     plt.figure(figsize=(10,7))
     plt.scatter(x = pc1, y = pc2, s = 70,
                 c = cols, alpha = .65)

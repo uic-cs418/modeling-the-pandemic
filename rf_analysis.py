@@ -38,7 +38,7 @@ def select_relevant(X):
     return(X.loc[:,"Median age":"North America(%)"])
 
 def plot_obs_exp(model, x, y):
-    fig,ax = plt.subplots()
+    fig,ax = plt.subplots(figsize=(10,10))
 
     ax.scatter(x = (model.predict(x)), y = (y), s = 70)
 
@@ -47,6 +47,7 @@ def plot_obs_exp(model, x, y):
         np.max([ax.get_xlim(), ax.get_ylim()]),  # max of both axes
         ]
 
+    plt.rcParams.update({'font.size': 15})
     ax.plot(lims, lims, 'k-', alpha=0.75, zorder=0)
     ax.set_aspect('equal')
     ax.set_xlim(lims)
@@ -64,6 +65,7 @@ def rf_analysis(plot = True):
     test_error = abs((rf_model.predict(X_test2)) - (y_test))
     
     if plot:
+        plt.rcParams.update({'font.size': 15})
         plot_obs_exp(rf_model, X_test2, y_test)
         
     print("Mean absolute training error (deaths per thousand): ", np.mean(train_error))
