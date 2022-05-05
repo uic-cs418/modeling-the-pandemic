@@ -77,7 +77,7 @@ def lineChart():
 
 def scatterPlot(mergedSocCovid, city):
     plt.rcParams.update({'font.size': 15})
-    fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(nrows=2, ncols=2, figsize=(25,8))
+    fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(nrows=2, ncols=2, figsize=(25,12))
     fig.suptitle('Correlation of Sociodemographic factors with Covid Death Cases: '+ city,fontsize=20)
 
     sns.regplot(ax=ax1, data=mergedSocCovid, x="Median household income (USD)", y="Death Counts(Per 1000)")
