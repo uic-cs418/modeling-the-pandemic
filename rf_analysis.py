@@ -56,7 +56,7 @@ def plot_obs_exp(model, x, y):
     ax.set_title("Covid-19 Related Deaths per 1000\n(predicted by random forest regression)")
 
 def rf_analysis(plot = True):
-    data = pd.read_csv("socio-demographic-and-death-counts(combined).csv")
+    data = pd.read_csv("AllData-Covid-SocioDemographics-Cases-Deaths.csv")
     X_train, X_test, y_train, y_test = trim_and_split(data, True, True)
     X_train2, X_test2 = select_relevant(X_train), select_relevant(X_test)
     rf_model = rfr_default(X_train2, y_train)

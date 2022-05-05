@@ -112,7 +112,7 @@ def form_PCA(df):
     return pca2, xpca2
 
 def pca_analysis():
-    data = pd.read_csv("socio-demographic-and-death-counts(combined).csv")
+    data = pd.read_csv("AllData-Covid-SocioDemographics-Cases-Deaths.csv")
 
     X_train, X_test, y_train, y_test = trim_and_split(data)
     
