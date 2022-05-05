@@ -4,7 +4,6 @@ Created on Thu Apr  7 11:14:51 2022
 
 @author: fanta
 """
-
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
@@ -42,4 +41,63 @@ def plot_pca(pca_data, pca_model, labels, title, cmap = "icefire"):
     plt.xlabel("PC 1 (" + str(expl_1) + "% of Variance)")
     plt.ylabel("PC 2 (" + str(expl_2) + "% of Variance)")
     plt.title(title)
+    plt.show()
+    
+def plot_pca_cat_labeled(pca_data, pca_model, labels, title, data, cols):
+    pc1 = pca_data[:,0]
+    pc2 = pca_data[:,1]
+    #print(pc1, pc2)
+    plt.figure(figsize=(10,7))
+    plt.scatter(x = pc1, y = pc2, s = 70,
+                c = cols, alpha = .65)
+
+    
+    perc_explained = pca_model.explained_variance_ratio_*100
+    expl_1 = round(perc_explained[0],2)
+    expl_2 = round(perc_explained[1],2)
+    
+    plt.xlabel("PC 1 (" + str(expl_1) + "% of Variance)")
+    plt.ylabel("PC 2 (" + str(expl_2) + "% of Variance)")
+    plt.title(title)
+    for i in range(0, len(data.loc[:,"Zipcode"])):
+        print(pc1[i])
+        print(pc2[i])
+        print(str(data.loc[:,"Zipcode"][i]))
+        plt.text(pc1[i], pc2[i], str(data.loc[:,"Zipcode"][i]))
+    plt.show()
+    
+def pltcolor(lst):
+    cols=[]
+    for l in lst:
+        if l=='NY':
+            cols.append(1)
+        elif l=='TX':
+            cols.append(2)
+        elif l=='WI':
+            cols.append(3)
+        elif l =='IL':
+            cols.append(4)
+        else:
+            cols.append(5)
+    return np.array(cols)
+# Create the colors list using the function above
+#cols=pltcolor(X_train.loc[:,"state"])
+
+def plot_pca_cat(pca_data, pca_model, labels, title, cols):
+    pc1 = pca_data[:,0]
+    pc2 = pca_data[:,1]
+    plt.figure(figsize=(10,7))
+    plt.scatter(x = pc1, y = pc2, s = 70,
+                c = cols, alpha = .65)
+
+    
+    perc_explained = pca_model.explained_variance_ratio_*100
+    expl_1 = round(perc_explained[0],2)
+    expl_2 = round(perc_explained[1],2)
+    
+    plt.xlabel("PC 1 (" + str(expl_1) + "% of Variance)")
+    plt.ylabel("PC 2 (" + str(expl_2) + "% of Variance)")
+    plt.title(title)
+    
+
     plt.show()
