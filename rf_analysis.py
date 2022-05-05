@@ -37,20 +37,6 @@ def trim_and_split(df, remove_0s = True, remove_outliers = True):
 def select_relevant(X):
     return(X.loc[:,"Median age":"North America(%)"])
 
-
-def rf_analysis():
-    data = pd.read_csv("socio-demographic-and-death-counts(combined).csv")
-    X_train, X_test, y_train, y_test = trim_and_split(data, True, True)
-    X_train2, X_test2 = select_relevant(X_train), select_relevant(X_test)
-    rf_model = rfr_default(X_train2, y_train)
-    train_error = abs((rf_model.predict(X_train2)) - (y_train))
-    test_error = abs((rf_model.predict(X_test2)) - (y_test))
-    
-    
-    return {"model": rf_model,
-            "train_error": train_error,
-            "test_error": test_error}
-
 def plot_obs_exp(model, x, y):
     fig,ax = plt.subplots()
 
@@ -67,5 +53,22 @@ def plot_obs_exp(model, x, y):
     ax.set_ylim(lims)
     ax.set_xlabel("Predicted")
     ax.set_ylabel("Actual")
-    ax.set_title("Covid-19 Related Deaths per 1000")
-    ax.show()
+    ax.set_title("Covid-19 Related Deaths per 1000\n(predicted by random forest regression)")
+
+def rf_analysis(plot = True):
+    data = pd.read_csv("socio-demographic-and-death-counts(combined).csv")
+    X_train, X_test, y_train, y_test = trim_and_split(data, True, True)
+    X_train2, X_test2 = select_relevant(X_train), select_relevant(X_test)
+    rf_model = rfr_default(X_train2, y_train)
+    train_error = abs((rf_model.predict(X_train2)) - (y_train))
+    test_error = abs((rf_model.predict(X_test2)) - (y_test))
+    
+    if plot:
+        plot_obs_exp(rf_model, X_test2, y_test)
+        
+    print("Mean absolute training error (deaths per thousand): ", np.mean(train_error))
+    print("Mean absolute test error (deaths per thousand): ", np.mean(test_error))
+    return {"model": rf_model,
+            "train_error": train_error,
+            "test_error": test_error},
+

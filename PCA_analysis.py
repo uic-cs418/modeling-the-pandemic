@@ -8,6 +8,8 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
 import numpy as np
+from rf_analysis import *
+import pandas as pd
 
 def scale_df(X):
     scaler = StandardScaler()
@@ -101,3 +103,19 @@ def plot_pca_cat(pca_data, pca_model, labels, title, cols):
     
 
     plt.show()
+    
+def form_PCA(df):
+    Numeric_socdem = df.loc[:,"Median age":"North America(%)"]
+
+    pca2, xpca2 = PCA_2(Numeric_socdem)
+
+    return pca2, xpca2
+
+def pca_analysis():
+    data = pd.read_csv("socio-demographic-and-death-counts(combined).csv")
+
+    X_train, X_test, y_train, y_test = trim_and_split(data)
+    
+    pca2, xpca2 = form_PCA(X_train)
+    
+    plot_pca(xpca2, pca2, y_train, "Principal Components plot\nColored by COVID-19 related deaths per 1000")
