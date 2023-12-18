@@ -2,7 +2,7 @@
 
 The aim of this project was to model the impact of COVID-19 in Chicago neighborhoods, using sociodemographic data (age, income, education etc.) and COVID-19 statistics (hospitalizations, deaths etc.). The sociodemographic and COVID-19 data used here is for each ZIP code.
 
-#### Data Collection & Wrangling
+### Data Collection & Wrangling
 
 The following steps were performed to clean the dataset.
 
@@ -15,7 +15,7 @@ The following steps were performed to clean the dataset.
 - Covid deaths and cases were merged with Sociodemographic data.
 - Normalization of Covid deaths and cases was performed by each zipcode's population, resulting in values rounded to two decimal points (cases per 1,000 / deaths per 1,000).
 
-#### Exploratory Data Analysis & Visualization
+### Exploratory Data Analysis & Visualization
 
 **Time series analysis.** In the beginning of 2022, number of cases nearly rose to 50,000 per day which was far more than the initial Covid outbreak.
 ![Alt text](assets/time-series.png)
@@ -26,14 +26,14 @@ The following steps were performed to clean the dataset.
 **Correlation analysis:** It is evident, that there is some correlation with economic standing of a neighboorhood and the impact of Covid 19.
 ![Alt text](assets/correlation.png)
 
-#### Data Modeling
+### Data Modeling
 **Random forest regression** (RFR) model was used to predict COVID-19 deaths per capita as a function of sociodemographic variables in each zipcode. The RFR was poor at predicting extreme values (death rates that were either zero or much higher than usual). Therefore, the final model is trained on data filtered to remove zipcodes with death rates of either zero or greater than the 95th percentile. This resulted in a training error rate of 0.29 deaths per thousand people and a test error rate of 0.78 deaths per thousand people.
 ![Alt text](assets/rfr.png)
 
 **Principal components analysis** (PCA) was used to help visualize the distribution of COVID-19-related death rates in the multivariate sociodemographic dataspace. There is not an obvious pattern in the distribution of death rates over the first two principal components. One reason for this may be that the zipcodes represented here include several different types of areas (e.g., rural, urban, and suburban) and the relationship between sociodemographic variables and COVID-19 death rates may not be consistent across all of these areas.
 ![Alt text](assets/pcp.png)
 
-#### Takeaways
+### Takeaways
 - Household income and housing value have a negative correlation with Covid death rate, while poverty level has a positive correlation with Covid death rate.
 - The percentage of people taking public transit to work seemed to be the most important feature in predicting Covid across the cities and states.
 - Other important features include ethnicity, owning vs renting, population density, poverty level and housing value.
