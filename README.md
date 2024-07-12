@@ -43,3 +43,10 @@ The following steps were performed to clean the dataset.
 To get more details about the project look into this [notebook](https://github.com/uic-cs418/cs418-spring22-bored-grad-yacht-club/blob/main/CS418_final_report.ipynb) and [ppt](https://github.com/uic-cs418/modeling-the-pandemic/blob/main/Reports%20%26%20Presentations/CS418_final_presentation.pdf).
 
 **Group**: Bored Grad Yacht Club
+
+### Team Members:
+Kazi Shahrukh Omar
+Christopher Owen
+Abdul Rafey Siddiqui
+Nguyen Hoa Pham
+Gautam Kushwah
