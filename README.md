@@ -45,8 +45,8 @@ To get more details about the project look into this [notebook](https://github.c
 **Group**: Bored Grad Yacht Club
 
 ### Team Members:
-Kazi Shahrukh Omar
-Christopher Owen
-Abdul Rafey Siddiqui
-Nguyen Hoa Pham
-Gautam Kushwah
+- Kazi Shahrukh Omar
+- Christopher Owen
+- Abdul Rafey Siddiqui
+- Nguyen Hoa Pham
+- Gautam Kushwah
